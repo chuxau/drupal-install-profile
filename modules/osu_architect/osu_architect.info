@@ -1,0 +1,7 @@
+name = "osu_architect"
+description = "Define architect roles"
+core = "7.x"
+package = "Features"
+version = "7.x-1.0"
+features[user_role][] = "architect"
+

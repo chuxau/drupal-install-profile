@@ -1,0 +1,115 @@
+<?php
+/**
+ * @file
+ */
+
+// Drupal needs this blank file.
+
+
+/**
+ * These functions below use form_alter to lock down
+ * the admin forms and basically hide the administrator role.
+ *
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter
+ *
+ * Alter user form and remove Administrator as a role option.
+ *
+ */
+function osu_manager_form_user_register_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($user->name != 'cws_dpla'){
+    unset($form['account']['roles']['#options'][6]);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter
+ *
+ * Alter user form and remove Administrator as a role option.
+ *
+ */
+function osu_manager_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($user->name != 'cws_dpla'){
+    unset($form['account']['roles']['#options'][6]);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter
+ *
+ * Alter user form and remove Administrator as a role option.
+ *
+ */
+function osu_manager_form_user_filter_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($user->name != 'cws_dpla'){
+    unset($form['filters']['status']['filters']['role']['#options'][6]);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter
+ *
+ * Alter user form and remove Administrator as a role option.
+ *
+ */
+function osu_manager_form_user_admin_account_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($user->name != 'cws_dpla'){
+    unset($form['options']['operation']['#options']['Add a role to the selected users']['add_role-6']);
+    unset($form['options']['operation']['#options']['Remove a role from the selected users']['remove_role-6']);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter
+ *
+ * Alter user form and remove Administrator as a role option.
+ *
+ */
+function osu_manager_form_user_admin_roles_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($user->name != 'cws_dpla'){
+    unset($form['roles'][6]);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter
+ *
+ * Alter user form and remove Administrator as a role option.
+ *
+ */
+function osu_manager_form_user_admin_permissions_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($user->name != 'cws_dpla'){
+    unset($form['role_names']['#value'][6]);
+    unset($form['role_names'][6]);
+    unset($form['checkboxes'][6]);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter
+ *
+ * Alter user form and remove Administrator as a role option.
+ *
+ */
+function osu_manager_form_user_admin_settings_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($user->name != 'cws_dpla'){
+    unset($form['admin_role']);
+  }
+}
+

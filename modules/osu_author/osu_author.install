@@ -1,0 +1,301 @@
+<?php
+/**
+ * @file
+ * osu_editor.install
+ */
+
+
+/**
+ * Implement hook_install
+ *
+ */
+function osu_author_install(){
+  osu_config_author();
+  osu_config_imce();
+  osu_config_wysiwyg();
+}
+
+/**
+ * Author role
+ */
+function osu_config_author() {
+  // Create the author role
+  $role = new stdClass();
+  $role->name = 'author';
+  $role->weight = 5;
+  user_role_save($role);
+
+  // Add permissions
+  $perms = array(
+      "access administration menu"    => "1",
+      "access administration pages"   => "1",
+      "access content overview"       => "1",
+      "access contextual links"       => "1",
+      "access dashboard"      => "1",
+      "access overlay"        => "1",
+      "access own webform results"    => "1",
+      "add media from remote sources" => "1",
+      "administer media"      => "1",
+      "create article content"        => "1",
+      "create biblio content" => "1",
+      "create feature_story content"  => "1",
+      "create feed"   => "1",
+      "create feed content"   => "1",
+      "create page content"   => "1",
+      "create url aliases"    => "1",
+      "create webform content"        => "1",
+      "delete any article content"    => "1",
+      "delete any biblio content"     => "1",
+      "delete any feature_story content"      => "1",
+      "delete any feed content"       => "1",
+      "delete any page content"       => "1",
+      "delete any webform content"    => "1",
+      "delete own article content"    => "1",
+      "delete own biblio content"     => "1",
+      "delete own feature_story content"      => "1",
+      "delete own feed content"       => "1",
+      "delete own page content"       => "1",
+      "delete own webform content"    => "1",
+      "delete revisions"      => "1",
+      "delete terms in 1"     => "1",
+      "download original image"       => "1",
+      "edit any article content"      => "1",
+      "edit any biblio content"       => "1",
+      "edit any feature_story content"        => "1",
+      "edit any feed content" => "1",
+      "edit any page content" => "1",
+      "edit any webform content"      => "1",
+      "edit feed"     => "1",
+      "edit media"    => "1",
+      "edit own article content"      => "1",
+      "edit own biblio content"       => "1",
+      "edit own feature_story content"        => "1",
+      "edit own feed content" => "1",
+      "edit own page content" => "1",
+      "edit own webform content"      => "1",
+      "edit terms in 1"       => "1",
+      "flush caches"  => "1",
+      "import media"  => "1",
+      "revert revisions"      => "1",
+      "skip CAPTCHA"  => "1",
+      "use text format filtered_html" => "1",
+      "use text format full_html"     => "1",
+      "view advanced help index"      => "1",
+      "view advanced help popup"      => "1",
+      "view advanced help topic"      => "1",
+      "view revisions"        => "1",
+      "view the administration theme" => "1",
+      );
+
+  $rids = array_keys(user_roles(), 'author');
+
+  // user_role_change_permissions($rids[0], $perms);
+  drupal_set_message(st('OSU Author has been configured.'));
+
+}
+
+/**
+ * Configure wysiwyg
+ */
+function osu_config_wysiwyg() {
+
+  $config = array (
+      'default' => '1',
+      'theme' => 'advanced',
+      'show_toggle' => '1',
+      'buttons' => array(
+        'advimage' => array('advimage'=>'1'),
+        'advlink' => array('advlink' => '1'),
+        'default' => array(
+          'bold' => '1',
+          'italic' => '1',
+          'underline' => '1',
+          'strikethrough' => '1',
+          'bullist' => '1',
+          'numlist' => '1',
+          'undo' => '1',
+          'redo' => '1',
+          'link' => '1',
+          'unlink' => '1',
+          'anchor' => '1',
+          'image' => '1',
+          'cleanup' => '1',
+          'sup' => '1',
+          'sub' => '1',
+          'code' => '1',
+          'hr' => '1',
+          'charmap' => '1',
+        ),
+        'font'    => array('formatselect'=>'1','styleselect'=>'1'),
+        'cmslink' => array('cmslink' => '1'),
+        'imce'    => array('imce' => '1'),
+        'drupal'  => array('break' => '1'),
+        'paste'   => array('pasteword' => '1'),
+        'searchreplace' => array('search' => '1'),
+        'spellchecker' => array('spellchecker' => '1'),
+        'table' => array('tablecontrols' => '1'),
+      ),
+      'apply_source_formatting' => 'true',
+      'convert_fonts_to_spans' => 'true',
+      'language' => 'en',
+      'preformatted' => 'false',
+      'remove_linebreaks' => 'true',
+      'verify_html' => 'true',
+      'css_classes' => '',
+      'css_setting' => 'none',
+      'path_loc' => 'bottom',
+      'resizing' => 'true',
+      'toolbar_loc' => 'top',
+      'toolbar_align' => 'left',
+      'block_formats' => 'p, address, pre, h1, h2, h3, h4, h5, h6'
+    );
+
+  // Filtered HTML
+  $record = new stdClass();
+  $record->format   = 'filtered_html';
+  $record->editor   = 'tinymce';
+  $record->settings = $config;
+
+  drupal_write_record('wysiwyg', $record);
+
+  // Full HTML
+  $record = new stdClass();
+  $record->format   = 'full_html';
+  $record->editor   = 'tinymce';
+  $record->settings =  $config;
+
+  drupal_write_record('wysiwyg', $record);
+
+  drupal_set_message(st('OSU wysiwyg configuration complete.'));
+
+}
+
+function osu_config_imce() {
+
+  $imce_profiles = array(
+
+  1 => array(
+    'name'        => 'User-1',
+    'usertab'     => '1',
+    'filesize'    => '0',
+    'quota'       => '0',
+    'tuquota'     => '0',
+    'extensions'  => '*',
+    'dimensions'  => '0',
+    'filenum'     => '0',
+    'directories' => array(
+      array(
+        'name'   => '.',
+        'subnav' => '1',
+        'browse' => '1',
+        'upload' => '1',
+        'thumb'  => '1',
+        'delete' => '1',
+        'resize' => '1',
+        'mkdir'  => '1',
+        'rmdir'  => '1'
+      )
+    ),
+    'thumbnails' => array(
+      array(
+        'name'       => 'Small',
+        'dimensions' => '90x90',
+        'prefix'     => 'small_',
+        'suffix'     => ''
+      ),
+      array(
+        'name'       => 'Medium',
+        'dimensions' => '120x120',
+        'prefix'     => 'medium_',
+        'suffix'     => ''
+      ),
+      array(
+        'name'       => 'Large',
+        'dimensions' => '180x180',
+        'prefix'     => 'large_',
+        'suffix'     => ''
+      ),
+    ),
+  ),
+
+  2 => array(
+    'name'        => 'OSU-default',
+    'usertab'     => '1',
+    'filesize'    => '0',
+    'quota'       => '0',
+    'tuquota'     => '0',
+    'extensions'  => '*',
+    'dimensions'  => '0',
+    'filenum'     => '0',
+    'directories' => array(
+      array(
+        'name'   => '.',
+        'subnav' => '1',
+        'browse' => '1',
+        'upload' => '1',
+        'thumb'  => '1',
+        'delete' => '1',
+        'resize' => '1',
+        'mkdir'  => '0',
+        'rmdir'  => '0'
+      ),
+    ),
+    'thumbnails' => array(
+      array(
+        'name'       => 'Small',
+        'dimensions' => '90x90',
+        'prefix'     => 'small_',
+        'suffix'     => ''
+      ),
+      array(
+        'name'       => 'Medium',
+        'dimensions' => '120x120',
+        'prefix'     => 'medium_',
+        'suffix'     => ''
+      ),
+      array(
+        'name'       => 'Large',
+        'dimensions' => '180x180',
+        'prefix'     => 'large_',
+        'suffix'     => ''
+        ),
+      ),
+    ),
+  );
+
+  variable_set('imce_profiles', $imce_profiles);
+
+  //set default weight and user id
+
+  $roles = user_roles();
+
+  $roles_profiles = array();
+  $weight = 0;
+
+  foreach ($roles as $rid => $rname) {
+    $pid = 0;
+
+    switch ($rname) {
+      case 'administrator' :
+      case 'manager' :
+      case 'architect' :
+        $pid = 1;
+        break;
+      case 'author' :
+        $pid = 2;
+    }
+
+    $roles_profiles[$rid] = array(
+      'weight'      => $weight,
+      'public_pid'  => $pid,
+      'youtube_pid' => $pid,
+      'vimeo_pid'   => $pid,
+    );
+
+    $weight++;
+  }
+  variable_set("imce_roles_profiles", $roles_profiles);
+  drupal_set_message(st('OSU IMCE configuration is complete.'));
+}
+
+

@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * Implements hook_install()
+ *
+ * Configure Captcha / reCaptcha
+ * and configure Contact form ro use it
+ */
+function osu_captcha_install() {
+
+  variable_set('captcha_default_challenge', "recaptcha/reCAPTCHA");
+  variable_set("captcha_administration_mode", 0);
+  variable_set('recaptcha_ajax_api', 0);
+  variable_set('recaptcha_private_key', "Get your key from Google");
+  variable_set('recaptcha_public_key', "Get your key from Google");
+  variable_set('recaptcha_theme', "clean");
+
+  // Configure contact forms to use Captcha
+  $captcha_forms = array();
+  $captcha_forms[] = array(
+    'form_id'      =>  'contact_site_form',
+    'module'       =>  'recaptcha',
+    'captcha_type' =>  'reCAPTCHA',
+  );
+  $captcha_forms[] = array(
+    'form_id'      =>  'contact_personal_form',
+    'module'       =>  'recaptcha',
+    'captcha_type' =>  'reCAPTCHA',
+  );
+
+  // Write these to the database
+  if ( db_table_exists('captcha_points') ) {
+
+    foreach ($captcha_forms as $form) {
+      // Try this first. If it doesn't work revert to db_query below
+      drupal_write_record('captcha_points', $form, 'form_id');
+    }
+  }
+  else {
+    // Table doesn't exist yet so fail
+    drupal_set_message(t('Could not configure the Contact form to use reCaptcha. You can do this manually from Admin -> User -> CAPTCHA'));
+  }
+}
+

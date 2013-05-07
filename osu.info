@@ -1,0 +1,159 @@
+name = OSU Install
+description = Install with commonly used features pre-configured.
+core = 7.x
+version = 7.x-1.1.0
+
+; Core modules
+dependencies[] = block
+dependencies[] = color
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = dashboard
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = dblog
+dependencies[] = search
+dependencies[] = shortcut
+;dependencies[] = toolbar
+dependencies[] = overlay
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = rdf
+dependencies[] = book
+
+
+; Administration
+dependencies[] = "admin_menu"
+dependencies[] = "admin_menu_toolbar"
+;dependencies[] = "admin_views"
+
+; Biblio
+dependencies[] = "biblio"
+;dependencies[] = "biblio_bibtex"
+;dependencies[] = "biblio_citeproc"
+;dependencies[] = "biblio_crossref"
+;dependencies[] = "biblio_tagged"
+;dependencies[] = "biblio_xml"
+;dependencies[] = "biblio_marc"
+;dependencies[] = "biblio_pm"
+;dependencies[] = "biblio_ris"
+;dependencies[] = "biblio_rtf"
+
+; Central Authentication Service
+dependencies[] = "cas"
+
+; Chaos tool suite
+dependencies[] = "ctools"
+;dependencies[] = "bulk_export"
+;dependencies[] = "CTools" AJAX Example
+;dependencies[] = "ctools_ajax_sample"
+;dependencies[] = "CTools" Plugin Example
+;dependencies[] = "ctools_custom_content"
+;dependencies[] = "ctools_access_ruleset"
+;dependencies[] = "page_manager"
+;dependencies[] = "stylizer"
+;dependencies[] = "views_content"
+
+
+; Date/Time
+dependencies[] = "date"
+dependencies[] = "date_all_day"
+dependencies[] = "date_api"
+dependencies[] = "date_popup"
+dependencies[] = "date_tools"
+;dependencies[] = "date_context"
+;dependencies[] = "date_migrate"
+;dependencies[] = "date_repeat"
+;dependencies[] = "date_repeat_field"
+;dependencies[] = "date_views"
+
+; Fields
+;dependencies[] = "filefield_paths"
+;dependencies[] = "link"
+;dependencies[] = "viewfield"
+
+; Input filters
+dependencies[] = "pathfilter"
+
+; Media
+dependencies[] = "imce"
+dependencies[] = "imce_mkdir"
+dependencies[] = "media"
+dependencies[] = "media_internet"
+; dependencies[] = "emfield"
+dependencies[] = "media_vimeo"
+dependencies[] = "media_youtube"
+;dependencies[] = "media_mediaspace"
+
+; Other
+dependencies[] = "entity"
+dependencies[] = "footer_message"
+dependencies[] = "libraries"
+dependencies[] = "pathauto"
+dependencies[] = "token"
+dependencies[] = "transliteration"
+dependencies[] = "advanced_help"
+; dependencies[] = "help_example"
+; dependencies[] = "auto_nodetitle"
+; dependencies[] = "entity_token"
+
+; Spam control
+dependencies[] = "captcha"
+dependencies[] = "image_captcha"
+dependencies[] = "recaptcha"
+dependencies[] = "recaptcha_mailhide"
+
+; Taxonomy
+;dependencies[] = "taxonomy_csv"
+
+; User interface
+dependencies[] = "imce_wysiwyg"
+dependencies[] = "jquery_ui"
+;dependencies[] = "jquery_update"
+dependencies[] = "wysiwyg"
+dependencies[] = "nice_menus"
+dependencies[] = "jcarousel"
+dependencies[] = "lightbox2"
+
+; Views
+dependencies[] = "views"
+dependencies[] = "views_bulk_operations"
+dependencies[] = "views_ui"
+dependencies[] = "better_exposed_filters"
+dependencies[] = "features"
+
+; Webform
+dependencies[] = "webform"
+
+dependencies[] = "quicktabs"
+dependencies[] = "menu_breadcrumb"
+
+; OSU configuration
+dependencies[] = "osu_cas"
+dependencies[] = "osu_captcha"
+dependencies[] = "osu_manager"
+dependencies[] = "osu_architect"
+dependencies[] = "osu_author"
+dependencies[] = "osu_cache"
+
+; OSU modules
+dependencies[] = "osu_top_hat"
+dependencies[] = "osu_search"
+dependencies[] = "live_feeds"
+dependencies[] = "osu_events"
+dependencies[] = "osu_news"
+dependencies[] = "osu_announcements"
+dependencies[] = "osu_wordpress"
+
+
+; Features
+dependencies[] = "video_carousel"
+dependencies[] = "feature_story"
+
+

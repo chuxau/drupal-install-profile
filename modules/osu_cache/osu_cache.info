@@ -1,0 +1,7 @@
+name = "osu_cache"
+description = "Configure caching"
+core = "7.x"
+package = "Features"
+version = "7.x-1.0"
+project = "osu_cache"
+

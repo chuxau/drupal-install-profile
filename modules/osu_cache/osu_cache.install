@@ -1,0 +1,58 @@
+<?php
+/**
+ * @file
+ * osu_cache.install
+ */
+
+/**
+ * Implements hook_install().
+ */
+function osu_cache_install() {
+  global $databases;
+  $db_name = $databases['default']['default']['database'];
+
+  // Temporary fix to surpress memcache errors
+  variable_set('error_level', 0);
+
+  // Turn on caching
+  variable_set('cache', '1');
+  variable_set('block_cache', '1');
+  variable_set('page_compression', '1');
+
+  // Optimize css and js files
+  variable_set('preprocess_css','1');
+  variable_set('preprocess_js','1');
+
+  // Get the settings file
+  $settings_file = getcwd() . '/sites/default/settings.php';
+
+  // write the configuration to settings.php
+  $settings .= <<<EOL
+
+// Configure memcache
+include_once('./includes/cache.inc');
+include_once('./sites/all/modules/memcache/memcache.inc');
+\$conf['cache_default_class'] = 'MemCacheDrupal';
+\$conf['memcache_key_prefix'] = "$db_name";
+
+\$conf['memcache_servers'] = array(
+    'memcache-server1:11211' => 'default',
+    'memcache-server2:11211' => 'default',
+    'memcache-server3:11211' => 'default',
+    'memcache-server4:11211' => 'default',
+);
+\$conf['memcache_bins']    = array('cache' => 'default');
+
+EOL;
+
+
+  if (is_writable($settings_file)) {
+    file_put_contents($settings_file, $settings, FILE_APPEND);
+    module_enable(array('memcache'));
+    drupal_set_message(t('The cache has been configured'));
+  }
+  else {
+   drupal_set_message(st("Couldn't write to the settings file."));
+  }
+}
+

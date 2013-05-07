@@ -1,0 +1,119 @@
+<?php
+/**
+ * @file
+ * osu_roles.install
+ */
+
+/**
+ * Implements hook_install().
+ */
+function osu_architect_install() {
+
+  // Add role
+  $role = new stdClass();
+  $role->name = 'architect';
+  $role->weight = 4;
+  user_role_save($role);
+
+  // Define permissions
+  $perms = array (
+      "access administration menu"        => "1",
+      "access administration pages"       => "1",
+      "access content overview"           => "1",
+      "access contextual links"           => "1",
+      "access dashboard"                  => "1",
+      "access overlay"                    => "1",
+      "access own webform results"        => "1",
+      "add media from remote sources"     => "1",
+      "administer biblio"                 => "1",
+      "administer blocks"                 => "1",
+      "administer CAPTCHA settings"       => "1",
+      "administer content types"          => "1",
+      "administer date tools"             => "1",
+      "administer features"               => "1",
+      "administer filters"                => "1",
+      "administer image styles"           => "1",
+      "administer imce"                   => "1",
+      "administer lightbox2"              => "1",
+      "administer media"                  => "1",
+      "administer menu"                   => "1",
+      "administer pathauto"               => "1",
+      "administer recaptcha"              => "1",
+      "administer search"                 => "1",
+      "administer shortcuts"              => "1",
+      "administer taxonomy"               => "1",
+      "administer url aliases"            => "1",
+      "administer views"                  => "1",
+      "configure search"                  => "1",
+      "configure top hat"                 => "1",
+      "create article content"            => "1",
+      "create biblio content"             => "1",
+      "create feature_story content"      => "1",
+      "create feed"                       => "1",
+      "create feed content"               => "1",
+      "create page content"               => "1",
+      "create url aliases"                => "1",
+      "create webform content"            => "1",
+      "customize shortcut links"          => "1",
+      "delete any article content"        => "1",
+      "delete any biblio content"         => "1",
+      "delete any feature_story content"  => "1",
+      "delete any feed content"           => "1",
+      "delete any page content"           => "1",
+      "delete any webform content"        => "1",
+      "delete own article content"        => "1",
+      "delete own biblio content"         => "1",
+      "delete own feature_story content"  => "1",
+      "delete own feed content"           => "1",
+      "delete own page content"           => "1",
+      "delete own webform content"        => "1",
+      "delete revisions"                  => "1",
+      "delete terms in 1 taxonomy"        => "1",
+      "download original image"           => "1",
+      "edit any article content"          => "1",
+      "edit any biblio content"           => "1",
+      "edit any feature_story content"    => "1",
+      "edit any feed content"             => "1",
+      "edit any page content"             => "1",
+      "edit any webform content"          => "1",
+      "edit biblio authors"               => "1",
+      "edit by all biblio authors"        => "1",
+      "edit feed"                         => "1",
+      "edit media"                        => "1",
+      "edit own article content"          => "1",
+      "edit own biblio content"           => "1",
+      "edit own feature_story content"    => "1",
+      "edit own feed content"             => "1",
+      "edit own page content"             => "1",
+      "edit own webform content"          => "1",
+      "edit terms in 1"                   => "1",
+      "first time configuration"          => "1",
+      "flush caches"                      => "1",
+      "import from file"                  => "1",
+      "import media"                      => "1",
+      "manage features"                   => "1",
+      "revert revisions"                  => "1",
+      "show download links"               => "1",
+      "show export links"                 => "1",
+      "show own download links"           => "1",
+      "skip CAPTCHA"                      => "1",
+      "switch shortcut sets"              => "1",
+      "use text format filtered_html"     => "1",
+      "use text format full_html"         => "1",
+      "view advanced help index"          => "1",
+      "view advanced help popup"          => "1",
+      "view advanced help topic"          => "1",
+      "view own unpublished content"      => "1",
+      "view revisions"                    => "1",
+      "view the administration theme"     => "1",
+      );
+
+  // Get rid for this role
+  $rids = array_keys(user_roles(), 'architect');
+
+  // Save permissions
+  //user_role_change_permissions($rids[0], $perms);
+
+  drupal_set_message(st('OSU Architect has been configured.'));
+
+}
